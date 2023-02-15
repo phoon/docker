@@ -4,6 +4,11 @@
 
 server_id = 1
 
+gtid_mode=ON
+enforce_gtid_consistency=ON
+innodb_flush_log_at_trx_commit=1
+sync_binlog=1
+
 log_bin = mysql-bin
 log-slave-updates
 binlog_format = ROW
@@ -15,5 +20,5 @@ relay-log-info-repository=TABLE
 skip-slave-start
 
 report-port=3306
-report-host="replication_agustin.9ddd4f_master"
+report-host="replication_peven.d90dab_master"
 

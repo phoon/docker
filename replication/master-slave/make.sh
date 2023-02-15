@@ -57,18 +57,18 @@ echo "---> Setting up slaves"
 echo "---> Waiting for slave01 to be up..."
 check_mysql_online ${SLAVE01_NODE}
 
-${EXEC_SLAVE01} "CHANGE MASTER TO MASTER_HOST='${MASTER_NODE}', \
+${EXEC_SLAVE01} "RESET MASTER;CHANGE MASTER TO MASTER_HOST='${MASTER_NODE}', \
 MASTER_USER='repl', MASTER_PASSWORD='repl', \
-MASTER_LOG_FILE='mysql-bin.000003', MASTER_LOG_POS=154" 2>&1 | grep -v "Using a password"
+MASTER_AUTO_POSITION=1;" 2>&1 | grep -v "Using a password"
 
 ${EXEC_SLAVE01} "START SLAVE" 2>&1 | grep -v "Using a password"
 
 echo "---> Waiting for slave02 to be up..."
 check_mysql_online ${SLAVE02_NODE}
 
-${EXEC_SLAVE02} "CHANGE MASTER TO MASTER_HOST='${MASTER_NODE}', \
+${EXEC_SLAVE02} "RESET MASTER;CHANGE MASTER TO MASTER_HOST='${MASTER_NODE}', \
 MASTER_USER='repl', MASTER_PASSWORD='repl', \
-MASTER_LOG_FILE='mysql-bin.000003', MASTER_LOG_POS=154" 2>&1 | grep -v "Using a password"
+MASTER_AUTO_POSITION=1;" 2>&1 | grep -v "Using a password"
 
 ${EXEC_SLAVE02} "START SLAVE" 2>&1 | grep -v "Using a password"
 
